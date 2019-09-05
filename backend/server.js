@@ -21,16 +21,66 @@ connection.once('open', function () {
     console.log("MongoDB Todos database connection established successfully")
 })
 
+// Using node.JS to make HTTP request to Coinbase API
+
+// const http = require('http');
+
+// const req = http.request({
+//     host: 'https://api.coinbase.com/v2/prices/BTC-USD/buy',
+//     port: PORT,
+//     method: 'GET'
+//   }, (res) => {
+//     res.resume();
+//     res.on('end', () => {
+//       if (!res.complete)
+//         console.error(
+//           'The connection was terminated while the message was still being sent');
+//     });
+//   });
+
+//   req.end();
+
+//   req.on('connect', (res, socket, head) => {
+//     console.log('got connected!');
+
+// todoRoutes.get('https://api.coinbase.com/v2/prices/BTC-USD/buy', function (req, res) {
+//     res.send('user ' + req.params.id)
+//   })
+
 // Add endpoint which is delivering all available todos items
-todoRoutes.route('/').get(function(req,res){
-    Todo.find(function(err, todos) {
-        if (err) {
-            console.log(err)
-        } else {
-            res.json(todos);
+
+// todoRoutes.route('/')
+//   .get(function(req, res){
+//     request({
+//       method: 'GET',
+//       uri: 'https://api.coinbase.com/v2/prices/BTC-USD/buy'
+//     }, function (error, response, body){
+//       if(!error && response.statusCode == 200){
+//         res.json(body);
+//         console.log("hello")
+//       }
+//     })
+//   });
+
+  var request = require('request');
+
+  app.get('/', function(req, res){
+    request({
+        method: 'GET',
+        uri: 'https://api.coinbase.com/v2/prices/BTC-USD/buy'
+      }, function (error, response, body){
+        if(!error && response.statusCode == 200){
+          res.json(body);
+          console.log("hello")
         }
-    })
-})
+      })
+  });
+
+//   app.use('/api', bookRouter);
+
+//   app.get('/', function(req, res){
+//     res.send('Welcome to my API');
+//   });
 
 // Add endpoint which retrieves a todo item by providing an ID
 todoRoutes.route('/:id').get(function(req,res){
