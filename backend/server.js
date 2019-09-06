@@ -11,7 +11,7 @@ let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/prices', {
+mongoose.connect('mongodb://127.0.0.1:27017/todos', {
     useNewUrlParser: true
 });
 
@@ -67,10 +67,11 @@ connection.once('open', function () {
   app.get('/', function(req, res){
     request({
         method: 'GET',
-        uri: 'https://api.coinbase.com/v2/prices/BTC-USD/buy'
+        uri: 'https://api.coinbase.com/v2/prices/BTC-USD/spot'
       }, function (error, response, body){
         if(!error && response.statusCode == 200){
-          res.json(body);
+        //   res.json(body);
+          res.send(body);
           console.log("hello")
         }
       })

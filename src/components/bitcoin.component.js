@@ -34,7 +34,7 @@ export default class Bitcoin extends Component {
     // }
 
     newBitcoinPrice() {
-        axios.get('https://api.coinbase.com/v2/prices/BTC-USD/buy')
+        axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot')
         .then(response => {
             // console.log(response);
             this.setState({ bitcoinPrice: response.data.data.amount });
