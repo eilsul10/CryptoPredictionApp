@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 let Price = new Schema({
     price: {
-        type: String
+        type: Number
     }
 })
 

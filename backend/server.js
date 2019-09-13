@@ -8,6 +8,8 @@ const todoRoutes = express.Router();
 
 let Todo = require('./todo.model');
 
+let Price = require('./bitcoin.model');
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -23,65 +25,48 @@ connection.once('open', function () {
 
 // Using node.JS to make HTTP request to Coinbase API
 
-// const http = require('http');
-
-// const req = http.request({
-//     host: 'https://api.coinbase.com/v2/prices/BTC-USD/buy',
-//     port: PORT,
-//     method: 'GET'
-//   }, (res) => {
-//     res.resume();
-//     res.on('end', () => {
-//       if (!res.complete)
-//         console.error(
-//           'The connection was terminated while the message was still being sent');
-//     });
-//   });
-
-//   req.end();
-
-//   req.on('connect', (res, socket, head) => {
-//     console.log('got connected!');
-
-// todoRoutes.get('https://api.coinbase.com/v2/prices/BTC-USD/buy', function (req, res) {
-//     res.send('user ' + req.params.id)
-//   })
-
-// Add endpoint which is delivering all available todos items
-
-// todoRoutes.route('/')
-//   .get(function(req, res){
-//     request({
-//       method: 'GET',
-//       uri: 'https://api.coinbase.com/v2/prices/BTC-USD/buy'
-//     }, function (error, response, body){
-//       if(!error && response.statusCode == 200){
-//         res.json(body);
-//         console.log("hello")
-//       }
-//     })
-//   });
-
   var request = require('request');
 
-  app.get('/', function(req, res){
+  app.get('/prices', function(req, res){
+    // req.body console logs empty object
+    let price = new Price();
+
+    // console.log(req.body)
     request({
         method: 'GET',
-        uri: 'https://api.coinbase.com/v2/prices/BTC-USD/spot'
+        uri: 'https://api.coinbase.com/v2/prices/BTC-USD/spot',
+        json: true
       }, function (error, response, body){
         if(!error && response.statusCode == 200){
-        //   res.json(body);
-          res.send(body);
+          let currentPrice = body.data.amount
+          price.price = currentPrice;
+          price.save()
+        //   res.send(body.data.amount);
+
           console.log("hello")
         }
       })
   });
 
-//   app.use('/api', bookRouter);
+//   app.post('/addPrices', function(req,res) {
+//       let price = new Price(req.body.data.amount);
 
-//   app.get('/', function(req, res){
-//     res.send('Welcome to my API');
-//   });
+//       request({
+//         method: 'POST',
+//         uri: 'https://api.coinbase.com/v2/prices/BTC-USD/spot'
+//       }, function (error, response, body){
+//         if(!error && response.statusCode == 200){
+//          price.save()
+//     .then (price => {
+//         res.status(200).json({'price': 'price added successfully'});
+//     })
+//     .catch(err => {
+//         res.status(400).send('adding new price failed');
+//     })
+//         }
+//       })
+//   })
+
 
 // Add endpoint which retrieves a todo item by providing an ID
 todoRoutes.route('/:id').get(function(req,res){
