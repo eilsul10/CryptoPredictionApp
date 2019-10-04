@@ -28,6 +28,7 @@ connection.once('open', function () {
   var request = require('request');
 
 //   function capturePrices () {
+// handler = code = start of callback, only needs to be defined once
 app.get('/prices', function(req, res){
     // req.body console logs empty object
     let price = new Price();
@@ -59,12 +60,12 @@ function getBTCPrices () {
           let currentPrice = body.data.amount
           price.price = currentPrice;
           price.save()
-          console.log(body.data.amount)
+        //   console.log(body.data.amount)
         }
       })
 }
 
-setInterval(getBTCPrices, 1000);
+setInterval(getBTCPrices, 60000);
     
 
 //   app.post('/addPrices', function(req,res) {

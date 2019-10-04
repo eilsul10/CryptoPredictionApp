@@ -44,7 +44,7 @@ export default class TodosList extends Component {
 
     render() {
         return(
-           <div>
+           <div class="p-3 mb-2 bg-dark text-white">
                <h3>Trading Todo List</h3>
                <table className = "table table-striped" style = {{marginTop: 20}}>
                     <thead>

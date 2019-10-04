@@ -10,7 +10,10 @@ import Bitcoin from "./components/bitcoin.component";
 class App extends Component {
   render() {
     return (
+
+      <div className="p-3 mb-2 bg-dark text-white">
       <Router>
+        
 
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,13 +34,14 @@ class App extends Component {
           </nav>
         </div>
         <br />
-
+        
         <Route path="/" exact component={TodosList} />
         <Route path="/" component = {Bitcoin} />
         <Route path="/edit/:id" component={EditTodo} />
         <Route path="/create" component={CreateTodo} />
 
       </Router>
+      </div>
     );
   }
 }
