@@ -14,8 +14,12 @@ export default class Bitcoin extends Component {
 
         setInterval(this.newBitcoinPrice.bind(this), 1000);
 
+        this.bitcoinChart();
+    }
 
-
+    componentWillUnmount () {
+        
+        this.bitcoinChart();
     }
 
 
@@ -43,7 +47,8 @@ export default class Bitcoin extends Component {
     { time: '2019-04-18', value: 76.64 },
     { time: '2019-04-19', value: 81.89 },
     { time: '2019-04-20', value: 74.43 },
-    ]);}
+    ]);
+}
 
 
     render() {
@@ -54,7 +59,10 @@ export default class Bitcoin extends Component {
                     { this.state.bitcoinPrice }
                 </p>
 
-                {this.bitcoinChart()}
+                <h3>Interesting Trends</h3>
+                <p>
+                { this.bitcoinChart }
+                </p>
             </div>
         )
     }
