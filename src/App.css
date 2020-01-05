@@ -24,7 +24,8 @@
 }
 
 .container {
-  background-color: black;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-family: 'Raleway', sans-serif;
 }
 
 @keyframes App-logo-spin {
