@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import BitcoinImage from "./images/Bitcoin-logo.jpg"
 
 import Bitcoin from "./components/bitcoin.component";
@@ -22,9 +22,18 @@ class App extends Component {
           <Link to="/pricetable" className="navbar-brand">Bitcoin Price Chart</Link>
           </nav>
         </div>
+
+        <Switch>
+          <Route path="/pricetable">
+            <PriceTable />
+          </Route>
+          <Route path="/">
+            <Bitcoin />
+          </Route>
+        </Switch>
         
-        <Route path="/" component = {Bitcoin} />
-        <Route path="/pricetable" component= {PriceTable} />
+        {/* <Route path="/" component = {Bitcoin} /> */}
+        {/* <Route path="/" component= {PriceTable} /> */}
 
         
       </Router>

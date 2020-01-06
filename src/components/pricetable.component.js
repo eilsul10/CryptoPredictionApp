@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {table} from 'table';
 
 export default class PriceTable extends Component {
     constructor(props) {
