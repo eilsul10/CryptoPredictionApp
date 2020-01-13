@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import '../css/bitcoin.css';
 // import { createChart } from 'lightweight-charts';
 // import Chart from 'chart.js';
 
@@ -71,19 +72,24 @@ export default class Bitcoin extends Component {
 
 
         return (
-            <div class="p-3 mb-2">
+            <div class="container">
+                
+                <div class="item-1">
                 <h3>Current Bitcoin Price</h3>
                 <p> 
                     { this.state.bitcoinPrice }
                 </p>
+                </div>
 
-                <h3>Prediction</h3>
+                <div class="item-2">
+                <h3>Current Prediction</h3>
                 <h5>By 10/24/19: Bitcoin will pump back to 12k</h5>
                 <p>The trend today (10/16/19) looks similar to the trend from July 2017 to September 2017</p>
                 <h6>
                 May to October 2017
                 { this.bitcoinChart }
                 </h6>
+                </div>
             </div>
         )
     }

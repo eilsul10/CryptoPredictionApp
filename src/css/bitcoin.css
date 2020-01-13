@@ -1,0 +1,11 @@
+.container {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-family: 'Raleway', sans-serif;
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    justify-content: space-around;
+    align-content: space-around;
+  }
