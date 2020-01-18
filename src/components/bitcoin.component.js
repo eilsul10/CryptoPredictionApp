@@ -16,7 +16,6 @@ export default class Bitcoin extends Component {
 
         setInterval(this.newBitcoinPrice.bind(this), 1000);
 
-        this.bitcoinChart();
     }
 
     componentWillUnmount () {
@@ -57,19 +56,6 @@ export default class Bitcoin extends Component {
 
 
     render() {
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         return (
             <div class="container">

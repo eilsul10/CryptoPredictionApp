@@ -2,12 +2,34 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import BitcoinImage from "./images/Bitcoin-logo.jpg"
+import axios from 'axios';
 
 import Bitcoin from "./components/bitcoin.component";
 import PriceTable from "./components/pricetable.component";
 import PastPredictions from "./components/pastpredictions.component";
 
 class App extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {bitcoinPrice: ''};
+  }
+
+  componentDidMount () {
+
+    setInterval(this.newBitcoinPrice.bind(this), 1000);
+}
+
+newBitcoinPrice() {
+  axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot')
+  .then(response => {
+      this.setState({ bitcoinPrice: response.data.data.amount });        
+  })
+  .catch(function (error){
+      console.log(error);
+  })
+}
+
   render() {
     return (
 
@@ -22,8 +44,9 @@ class App extends Component {
           <Link to="/" className="navbar-brand">Bitcoin Trends</Link>
           <Link to="/pricetable" className="navbar-brand">Bitcoin Price Chart</Link>
           <Link to="/pastpredictions" className="navbar-brand">Past Predictions</Link>
-
           </nav>
+
+
         </div>
 
         <Switch>
