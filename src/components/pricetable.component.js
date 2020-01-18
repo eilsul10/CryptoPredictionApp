@@ -3,12 +3,13 @@ import axios from 'axios';
 import mongoose from 'mongoose';
 import Bitcoin from './bitcoin.component';
 import $ from 'jquery';
+import moment from 'moment';
 
 export default class PriceTable extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {bitcoinPrice: ''};
+        this.state = {bitcoinPrice: '', date: ''};
     }
 
     componentDidMount () {
@@ -19,16 +20,8 @@ export default class PriceTable extends Component {
         //     this.setState({prices})
 // })  
 
-    setInterval(this.newBitcoinPrice.bind(this), 1000);
-
-
-      let newRow = $("<tr>").append (
-        $("<td>").text("date"),
-        $("<td>").text(this.state.bitcoinPrice)
-      )
-
-      $(".table").append(newRow);
-
+    setInterval(this.newBitcoinPrice.bind(this), 20000);
+    setInterval(this.newDate.bind(this), 20000);
 
     }
 
@@ -42,9 +35,28 @@ export default class PriceTable extends Component {
         })
     }
 
+    newDate() {
+      this.setState({date: moment().format('MMMM Do YYYY, h:mm:ss a')})
+    }
+
+    // appendTable() {
+    //   let newRow = $("<tr>").append (
+    //     $("<td>").text("date"),
+    //     $("<td>").text(this.state.bitcoinPrice)
+    //   )
+
+    //   $(".table").append(newRow);
+    // }
 
 
     render() {
+      
+      let newRow = $("<tr>").append (
+        $("<td>").text(this.state.date),
+        $("<td>").text(this.state.bitcoinPrice)
+      )
+
+      $(".table").append(newRow);
 
         return (
             <table class="table">
@@ -58,6 +70,7 @@ export default class PriceTable extends Component {
               <tr>
                 <th scope="row">1</th>
                 <td>{this.state.bitcoinPrice}</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
